@@ -1,4 +1,3 @@
-// Your client-side JavaScript code here
 async function startCamera() {
     const constraints = { video: true };
     try {
@@ -14,7 +13,6 @@ const captureButton = document.getElementById('capture-button');
 const capturedPhoto = document.getElementById('captured-photo');
 
 captureButton.addEventListener('click', () => {
-    // Capture and display the photo
     const video = document.getElementById('camera-feed');
     const canvas = document.createElement('canvas');
     canvas.width = video.videoWidth;
@@ -23,15 +21,12 @@ captureButton.addEventListener('click', () => {
     capturedPhoto.src = canvas.toDataURL('image/png');
     capturedPhoto.style.display = 'block';
 
-    // Convert the data URL to a Blob
     const dataUrl = canvas.toDataURL('image/png');
     const blob = dataURItoBlob(dataUrl);
 
-    // Create a FormData object and append the blob
     const formData = new FormData();
     formData.append('photo', blob);
 
-    // Send the FormData to the server for saving
     fetch('/upload', {
         method: 'POST',
         body: formData
@@ -45,7 +40,6 @@ captureButton.addEventListener('click', () => {
     });
 });
 
-// Function to convert Data URL to Blob
 function dataURItoBlob(dataURI) {
     const byteString = atob(dataURI.split(',')[1]);
     const ab = new ArrayBuffer(byteString.length);
